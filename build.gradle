@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "org.jetbrains.kotlin.jvm" version "1.3.60"
 }
 
 group 'com.github.davidedmonds'
@@ -12,5 +13,15 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.kubernetes:client-java:5.0.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    testCompile 'org.assertj:assertj-core:3.13.2'
+}
+
+test {
+    useJUnitPlatform()
 }
