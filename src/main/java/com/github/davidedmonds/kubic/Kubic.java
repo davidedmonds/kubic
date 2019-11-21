@@ -1,14 +1,14 @@
 package com.github.davidedmonds.kubic;
 
-import com.github.davidedmonds.kubic.client.KubernetesClient;
+import com.github.davidedmonds.kubic.client.KubeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Kubic {
     private static final Logger log = LoggerFactory.getLogger(Kubic.class);
-    private final KubernetesClient client;
+    private final KubeClient client;
 
-    public Kubic(KubernetesClient client) {
+    public Kubic(KubeClient client) {
         this.client = client;
     }
 

@@ -13,12 +13,13 @@ repositories {
 }
 
 dependencies {
-    compile 'io.kubernetes:client-java:5.0.0'
+    implementation 'io.fabric8:kubernetes-client:4.6.4'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    testCompile 'io.kubernetes:client-java:5.0.0'
     testCompile 'org.assertj:assertj-core:3.13.2'
     testCompile 'org.slf4j:slf4j-simple:1.7.28'
 }

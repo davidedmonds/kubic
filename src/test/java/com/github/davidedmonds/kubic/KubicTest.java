@@ -1,6 +1,6 @@
 package com.github.davidedmonds.kubic;
 
-import com.github.davidedmonds.kubic.client.KubernetesClient;
+import com.github.davidedmonds.kubic.client.KubeClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class KubicTest {
     void startAPod() throws Exception {
         Environment environment = new Environment("test");
 
-        new Kubic(new KubernetesClient()).startEnvironment(environment);
+        new Kubic(new KubeClient()).startEnvironment(environment);
 
         // assert
         assertThat(listPods()).contains(environment);
