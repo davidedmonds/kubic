@@ -3,6 +3,9 @@ package com.github.davidedmonds.kubic.client;
 import com.github.davidedmonds.kubic.Environment;
 import io.fabric8.kubernetes.api.model.Container;
 import io.fabric8.kubernetes.api.model.ContainerBuilder;
+import io.fabric8.kubernetes.api.model.Namespace;
+import io.fabric8.kubernetes.api.model.NamespaceBuilder;
+import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 
@@ -18,13 +21,23 @@ public class KubeClient {
     }
 
     public void launchPods(Environment environment) {
-        log.debug("Launching pods for {}", environment);
+        log.info("Creating {} namespace", environment);
+        client.namespaces().createOrReplaceWithNew()
+                .withNewMetadata()
+                .withName(environment.getName())
+                .endMetadata()
+                .done();
+
         Container helloContainer = new ContainerBuilder()
                 .withImage("gcr.io/hello-minikube-zero-install/hello-node")
+                .withName("hello-container")
                 .build();
-        String namespace = client.getNamespace();
-        client.pods().inNamespace(namespace)
+        log.info("Launching pods for {}", environment);
+        client.pods().inNamespace(environment.getName())
                 .createNew()
+                .withNewMetadata()
+                .withName(environment.getName())
+                .endMetadata()
                 .withNewSpec()
                 .withContainers(helloContainer)
                 .endSpec()

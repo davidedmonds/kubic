@@ -27,9 +27,9 @@ public class KubicTestHelper {
 
     private static ApiClient apiClient() throws IOException {
         if (apiClient == null) {
-            log.info("Establishing connection to Kubernetes");
+            log.debug("Establishing connection to Kubernetes");
             apiClient = Config.defaultClient();
-            log.info("Kubernetes connected");
+            log.debug("Kubernetes connected");
         }
         return apiClient;
     }
